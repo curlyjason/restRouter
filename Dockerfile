@@ -10,11 +10,11 @@ RUN npm install
 # RUN npm ci --only=production
 
 # Bundle app source
-COPY . .
+COPY ./index.js .
 
 #VOLUME ./working /usr/src/app/working
 
 #
-#EXPOSE 8080
+EXPOSE 8080
 #
 CMD [ "node", "index.js" ]
