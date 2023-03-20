@@ -10,7 +10,7 @@ const app = express();
 console.log('Running');
 
 app.get('/:file', (req, res) => {
-    let render = require(`./output/${req.params.file}`);
+    let render = require(`./working/${req.params.file}`);
     // console.log('--------------new request');
     // console.log(render());
     let output = render();
