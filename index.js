@@ -9,9 +9,16 @@ const app = express();
 
 console.log('Running');
 
-app.get('/', (req, res) => {
-    const rootRoutes = require('./working/rootRoutes');
-    res.status(200).send(rootRoutes());
+app.get('/:file', (req, res) => {
+    let render = require(`./output/${req.params.file}`);
+    // console.log('--------------new request');
+    // console.log(render());
+    let output = render();
+    // render = null
+    // console.log(render);
+    // console.log('--------------end request');
+
+    res.status(200).send(output);
 })
 
 app.listen(PORT, HOST, () => {
