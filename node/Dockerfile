@@ -12,7 +12,7 @@ RUN npm install
 # RUN npm ci --only=production
 
 # Bundle app source
-COPY ./index.js .
+COPY ./node .
 
 #VOLUME ./working /usr/src/app/working
 

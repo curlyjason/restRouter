@@ -1,0 +1,8 @@
+services:
+  app:
+    build:
+      dockerfile: './node/Dockerfile'
+    volumes:
+      - ./working:/app/working
+    ports:
+      - "8088:8080"
