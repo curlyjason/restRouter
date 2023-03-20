@@ -19,4 +19,4 @@ COPY ./index.js .
 #
 EXPOSE 8080
 #
-CMD [ "node", "index.js" ]
+CMD [ "/app/node_modules/nodemon/bin/nodemon.js", "index.js" ]
