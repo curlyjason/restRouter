@@ -1,18 +1,16 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0')
-// mongoose.connect('mongodb://localhost/playground')
-    .then(() => console.log('Connected to mongo db...'))
+mongoose.connect('mongodb://db:27017/playground', {
+    authSource: "admin",
+    user: "mongoadmin",
+    pass: "mongoadmin",
+})
+    .then(() => {
+            console.log('Connected to mongo db...');
+            createCourse();
+        }
+    )
     .catch((err) => console.log('Problem with connection', err));
-
-// mongoose.connect("mongodb://127.0.0.1:27017/playground", {
-    // authSource: "admin",
-    // user: "mongoadmin",
-    // pass: "mongoadmin",
-    // family: 4
-// })console.log('Problem with connection', err));
-
-
 
 const courseSchema = new mongoose.Schema({
     name: String,
