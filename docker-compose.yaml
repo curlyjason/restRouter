@@ -11,8 +11,8 @@ services:
     volumes:
       - /data/mongo
     restart: always
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
-      - MONGO_INITDB_ROOT_PASSWORD=mongoadmin
+#    environment:
+#      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+#      - MONGO_INITDB_ROOT_PASSWORD=mongoadmin
     ports:
       - "27017:27017"
