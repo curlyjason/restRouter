@@ -10,4 +10,9 @@ docker run -d -it --mount type=bind,source=/Users/dondrake/Sites/restRouter/work
 command line template to restart a container
 docker restart fervent_swirles
 
+RestAPI branch
+=========================
+A study project to turn Mosh's Vidly tutorial code into a more general use Rest Api framework
+
+endpoints: localhost:8080/api/:controller
 
