@@ -1,26 +1,16 @@
-'use strict';
-
 const express = require('express');
-
-const PORT = 8080;
-const HOST = '0.0.0.0';
+const api_routes = require('./src/routes/ApiRoutes');
 
 const app = express();
 
-console.log('Running');
+// Constants
+const PORT = 8080;
+const HOST = '0.0.0.0';
 
-app.get('/:file', (req, res) => {
-    let render = require(`./working/${req.params.file}`);
-    // console.log('--------------new request');
-    // console.log(render());
-    let output = render();
-    // render = null
-    // console.log(render);
-    // console.log('--------------end request');
+app.use(express.json());
+app.use('/api/', api_routes);
 
-    res.status(200).send(output);
-})
-
-app.listen(PORT, HOST, () => {
+app.listen(PORT, () => {
     console.log(`Running on http://${HOST}:${PORT}`);
 });
+
