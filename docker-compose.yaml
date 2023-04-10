@@ -13,6 +13,7 @@ services:
     image: mongo:latest
     volumes:
       - /data/mongo
+      - ./mongo:/tmp/mongo
     restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=mongoadmin
