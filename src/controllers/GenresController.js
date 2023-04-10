@@ -12,13 +12,23 @@ class GenresController
             .pattern(/^[a-zA-Z_ -]{3,100}$/)
             .required(),
         id: this.Joi.number()
-    })
+    });
+
+    Genres = require('../model/GenresTable');
+
+
 
     /**
      * @returns {[{name: string, id: number},{name: string, id: number}]}
      */
-    index() {
-        return this.data;
+    async index() {
+        // return {
+        //     "blah" : "foo",
+        //     "class" : this.Genres
+        // }
+        return await this.Genres.find().exec();
+        // console.log(this.Genres);
+        // return this.data;
     }
 
     /**
