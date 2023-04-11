@@ -26,9 +26,19 @@ class GenresController
         //     "blah" : "foo",
         //     "class" : this.Genres
         // }
-        return this.Genres.find();
-        // console.log(this.Genres);
-        // return this.data;
+        console.log('waiting...');
+        let result = this.Genres.find();
+        // result.then(
+        //     function (result) {
+        //         console.log('done waiting.');
+        //         console.log(result);
+        //         return result;
+        //     },
+        //     function (error) {
+        //         console.log('somthing went wrong.');
+        //     }
+        // )
+        return result;
     }
 
     /**

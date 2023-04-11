@@ -1,3 +1,5 @@
+// const {Promise} = require("mongoose");
+
 class Genres2Table {
 
     Joi = require('joi');
@@ -9,12 +11,25 @@ class Genres2Table {
         id: this.Joi.number()
     });
 
-    find () {
-        return [
-            {id: "sample id 1", name: "sample genre 1"},
-            {id: "sample id 2", name: "sample genre 2"},
-            {id: "sample id 3", name: "sample genre 3"},
-        ];
+    async find () {
+        console.log("accessing database...");
+        return new Promise((resolve, reject) => {
+            setTimeout(() => resolve([
+                {id: "sample id 1", name: "sample genre 1"},
+                {id: "sample id 2", name: "sample genre 2"},
+                {id: "sample id 3", name: "sample genre 3"},
+            ]), 4000)
+        })
+            .then(
+                function (result) {
+                    console.log('done waiting.');
+                    console.log(result);
+                    return result;
+                },
+                function (error) {
+                    console.log('something went wrong.');
+                }
+            );
     }
 }
 
