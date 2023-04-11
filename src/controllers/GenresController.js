@@ -14,19 +14,19 @@ class GenresController
         id: this.Joi.number()
     });
 
-    Genres = require('../model/GenresTable');
+    Genres = require('../model/Genres2Table');
 
 
 
     /**
      * @returns {[{name: string, id: number},{name: string, id: number}]}
      */
-    async index() {
+    index() {
         // return {
         //     "blah" : "foo",
         //     "class" : this.Genres
         // }
-        return await this.Genres.find().exec();
+        return this.Genres.find();
         // console.log(this.Genres);
         // return this.data;
     }
