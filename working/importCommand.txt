@@ -1,1 +1,3 @@
 mongoimport --db vidly --username=mongoadmin --password=mongoadmin --authenticationDatabase=admin --collection genres --drop --file tmp/mongo/seedGenres.json --jsonArray
+
+mongoimport --db vidly --username=mongoadmin --password=mongoadmin --authenticationDatabase=admin --collection genres --drop --file seedGenres.json --jsonArray
