@@ -7,6 +7,7 @@ function getController(controller, req, res) {
         let className = '../controllers/' + inflector.capitalize(controller) + 'Controller';
         return require(className);
     } catch (e) {
+        console.log(e);
         return false;
     }
 };
