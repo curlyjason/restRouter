@@ -25,11 +25,11 @@ const courseSchema = new mongoose.Schema({
 const Course = mongoose.model('Course', courseSchema);
 
 async function getCourses() {
-    return await Course.
-    find({ isPublished: true }).
-    sort('-price').
-    select('name author price').
-    exec();
+    return await Course
+        .find({ isPublished: true })
+        .sort('-price')
+        .select('name author price')
+        .exec();
 }
 
 async function run() {
