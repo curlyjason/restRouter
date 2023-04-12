@@ -19,5 +19,5 @@ COPY ./node .
 #
 EXPOSE 8080
 #
-#CMD [ "/app/node_modules/nodemon/bin/nodemon.js", "index.js" ]
-CMD [ "node", "index.js" ]
+CMD [ "/app/node_modules/nodemon/bin/nodemon.js", "index.js" ]
+#CMD [ "nodemon", "index.js" ]
