@@ -1,8 +1,11 @@
-// const {Promise} = require("mongoose");
 
-class GenresTable {
+const Table = require('./Table.js');
 
-    Joi = require('joi');
+class GenresTable extends Table {
+
+    prop = 'something';
+
+    // Joi = require('joi');
 
     schema = this.Joi.object({
         name: this.Joi.string()
@@ -11,8 +14,18 @@ class GenresTable {
         id: this.Joi.number()
     });
 
+    async _getConnection(callable) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => resolve(true), 1000)
+        })
+            .then(
+                (result) => {console.log('connecting to database...' + callable())}
+            )
+    }
+
     async find () {
-        console.log("accessing database...");
+        await this._getConnection(()=>{return 'using nodemon'});
+        console.log("finding records...");
         return new Promise((resolve, reject) => {
             setTimeout(() => resolve([
                 {id: "sample id 1", name: "sample genre 1"},
