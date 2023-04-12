@@ -30,11 +30,11 @@ function edit(req, res) {
 /**
  * index
  */
-router.get('/:controller', (req, res) => {
+router.get('/:controller', async (req, res) => {
     let controller = getController(req.params.controller);
     if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
 
-    return res.send(controller.index());
+    return res.send(await controller.index());
 })
 
 /**

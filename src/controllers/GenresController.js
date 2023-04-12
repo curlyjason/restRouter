@@ -21,23 +21,9 @@ class GenresController
     /**
      * @returns {[{name: string, id: number},{name: string, id: number}]}
      */
-    index() {
-        // return {
-        //     "blah" : "foo",
-        //     "class" : this.Genres
-        // }
+    async index() {
         console.log('waiting...');
-        let result = this.Genres.find();
-        // result.then(
-        //     function (result) {
-        //         console.log('done waiting.');
-        //         console.log(result);
-        //         return result;
-        //     },
-        //     function (error) {
-        //         console.log('somthing went wrong.');
-        //     }
-        // )
+        let result = await this.Genres.find();
         return result;
     }
 
