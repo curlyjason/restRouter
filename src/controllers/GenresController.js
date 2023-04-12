@@ -14,7 +14,7 @@ class GenresController
         id: this.Joi.number()
     });
 
-    Genres = require('../model/Genres2Table');
+    Genres = require('../model/GenresTable');
 
 
 

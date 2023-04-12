@@ -1,6 +1,6 @@
 // const {Promise} = require("mongoose");
 
-class Genres2Table {
+class GenresTable {
 
     Joi = require('joi');
 
@@ -33,4 +33,4 @@ class Genres2Table {
     }
 }
 
-module.exports = new Genres2Table();
+module.exports = new GenresTable();
