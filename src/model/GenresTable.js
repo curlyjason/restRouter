@@ -33,32 +33,16 @@ class GenresTable extends Table {
             .catch((err) => {
                 console.log('Failed connecting to database ' + err.message)
             });
-        this.Genres.find()
+        const result =  await this.Genres.find()
             .then((result) => {
-                console.log(result)
+                // console.log("Return From Database: " + result)
+                return result;
             })
             .catch((err) => {
                 console.log(err.message)
             })
-        // this.mongoose.find()
-        // console.log("finding records...");
-        // return new Promise((resolve, reject) => {
-        //     setTimeout(() => resolve([
-        //         {id: "sample id 1", name: "sample genre 1"},
-        //         {id: "sample id 2", name: "sample genre 2"},
-        //         {id: "sample id 3", name: "sample genre 3"},
-        //     ]), 4000)
-        // })
-        //     .then(
-        //         function (result) {
-        //             console.log('done waiting.');
-        //             console.log(result);
-        //             return result;
-        //         },
-        //         function (error) {
-        //             console.log('something went wrong.');
-        //         }
-        //     );
+
+        return result;
     }
 }
 
