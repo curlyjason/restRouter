@@ -31,8 +31,8 @@ class GenresController
      * @param id
      * @returns {{name: string, id: number}|{name: string, id: number}} | undefined
      */
-    view(id) {
-        return this.findById(id);
+    async view(id) {
+        return await this.Genres.findById(id);
     }
 
     /**

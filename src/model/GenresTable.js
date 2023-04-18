@@ -20,13 +20,34 @@ class GenresTable extends require('./Table.js') {
         await this._getConnection()
             .then((result) => {
                 console.log('Connected to database...')
-                // const genres = this.Genres.find().exec();
-                console.log(result);
+                // console.log(result);
             })
             .catch((err) => {
                 console.log('Failed connecting to database ' + err.message)
             });
         const result =  await this.Genres.find()
+            .then((result) => {
+                // console.log("Return From Database: " + result)
+                return result;
+            })
+            .catch((err) => {
+                console.log(err.message)
+            })
+
+        return result;
+    }
+
+    async findById (id) {
+        // await this._getConnection(()=>{return 'using nodemon'});
+        await this._getConnection()
+            .then((result) => {
+                console.log('Connected to database...')
+                // console.log(result);
+            })
+            .catch((err) => {
+                console.log('Failed connecting to database ' + err.message)
+            });
+        const result =  await this.Genres.findById(id)
             .then((result) => {
                 // console.log("Return From Database: " + result)
                 return result;

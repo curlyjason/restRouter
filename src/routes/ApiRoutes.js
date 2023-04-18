@@ -41,11 +41,11 @@ router.get('/:controller', async (req, res) => {
 /**
  * view
  */
-router.get('/:controller/:id', (req, res) => {
+router.get('/:controller/:id', async (req, res) => {
     let controller = getController(req.params.controller);
     if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
 
-    let result = controller.view(req.params.id);
+    let result = await controller.view(req.params.id);
     if (!result) return res.status(404).send(`The requested ${req.params.controller} could not be found`);
 
     return res.status(200).send(result);
