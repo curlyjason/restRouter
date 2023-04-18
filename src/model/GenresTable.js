@@ -1,12 +1,5 @@
 
-const Table = require('./Table.js');
-const mongoose = require("mongoose");
-
-class GenresTable extends Table {
-
-    prop = 'something';
-
-    // Joi = require('joi');
+class GenresTable extends require('./Table.js') {
 
     schema = this.Joi.object({
         name: this.Joi.string()
@@ -15,7 +8,7 @@ class GenresTable extends Table {
         id: this.Joi.number()
     });
 
-    genreSchema = new mongoose.Schema({
+    genreSchema = new this.mongoose.Schema({
         name: String,
     })
     // genreSchema = new mongoose.Schema(this.schema)
@@ -28,7 +21,7 @@ class GenresTable extends Table {
             .then((result) => {
                 console.log('Connected to database...')
                 // const genres = this.Genres.find().exec();
-                // console.log(genres);
+                console.log(result);
             })
             .catch((err) => {
                 console.log('Failed connecting to database ' + err.message)
