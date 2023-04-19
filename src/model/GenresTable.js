@@ -39,6 +39,16 @@ class GenresTable extends require('./Table.js') {
         }
         return await this.connection(findById);
     }
+
+    async save (data) {
+
+        console.log(data);
+        let save = async () => {
+            let genre = new this.Genres(data);
+            return await genre.save();
+        }
+        return await this.connection(save);
+    }
 }
 
 module.exports = new GenresTable();

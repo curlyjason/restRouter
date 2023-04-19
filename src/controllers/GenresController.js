@@ -38,21 +38,16 @@ class GenresController
      * @param {{name}} data
      * @returns {{name, id: *}}
      */
-    add(data) {
-        let genre = {
-            "name": data.name,
-            "id": this.getNewId()
-        }
+    async add(data) {
+        console.log("In add function...");
 
-        let { error } = this.schema.validate(genre);
+        let { error } = this.Genres.joiSchema.validate(data);
         if(error) return {
             error: error.message,
             post_data: data
         };
 
-        this.data.push(genre);
-
-        return genre;
+        return await this.Genres.save(data);
     }
 
     edit(id, data) {
