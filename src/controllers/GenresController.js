@@ -39,8 +39,6 @@ class GenresController
      * @returns {{name, id: *}}
      */
     async add(data) {
-        console.log("In add function...");
-
         let { error } = this.Genres.joiSchema.validate(data);
         if(error) return {
             error: error.message,

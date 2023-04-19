@@ -41,8 +41,6 @@ class GenresTable extends require('./Table.js') {
     }
 
     async save (data) {
-
-        console.log(data);
         let save = async () => {
             let genre = new this.Genres(data);
             return await genre.save();
