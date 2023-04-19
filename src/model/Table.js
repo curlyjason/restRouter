@@ -4,17 +4,24 @@ class Table {
     mongoose = require("mongoose");
     mongo = this.mongoose.mongo;
 
-    defaultDatabase = 'vidly';
+    database = 'vidly';
 
     Joi = require('joi');
 
-    async _getConnection(database = null) {
-        database = database ?? this.defaultDatabase;
-        return this.mongoose.connect(`mongodb://db:27017/${database}`, {
+    async connection(callback) {
+        return this.mongoose.connect(`mongodb://db:27017/${this.database}`, {
             authSource: "admin",
             user: "mongoadmin",
             pass: "mongoadmin",
         })
+            .then(async () => {
+                return await callback();
+            })
+            .catch((err) => {
+                console.log('Failed connecting to database ' + err.message)
+                return err;
+            });
+
     }
 }
 
