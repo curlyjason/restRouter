@@ -23,8 +23,7 @@ class GenresController
      */
     async index() {
         console.log('waiting...');
-        let result = await this.Genres.find();
-        return result;
+        return await this.Genres.find();
     }
 
     /**
