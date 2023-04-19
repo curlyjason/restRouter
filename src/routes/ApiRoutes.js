@@ -54,12 +54,12 @@ router.get('/:controller/:id', async (req, res) => {
 /**
  * add
  */
-router.post('/:controller', (req, res) => {
+router.post('/:controller', async (req, res) => {
     let controller = getController(req.params.controller);
     if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
     if(!contentIsJson(req)) return res.status(400).send("Request body must be 'application/json");
 
-    let result = controller.add(req.body);
+    let result = await controller.add(req.body);
     if (!result) return res.status(404).send(`The requested ${req.params.controller} could not be found`);
 
     return res.status(200).send(result);
