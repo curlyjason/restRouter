@@ -1,7 +1,7 @@
 
 class GenresTable extends require('./Table.js') {
 
-    schema = this.Joi.object({
+    joiSchema = this.Joi.object({
         name: this.Joi.string()
             .pattern(/^[a-zA-Z_ -]{3,100}$/)
             .required(),
@@ -11,52 +11,33 @@ class GenresTable extends require('./Table.js') {
     genreSchema = new this.mongoose.Schema({
         name: String,
     })
-    // genreSchema = new mongoose.Schema(this.schema)
 
     Genres = this.mongoose.model('genres', this.genreSchema);
 
     async find () {
-        // await this._getConnection(()=>{return 'using nodemon'});
-        await this._getConnection()
-            .then((result) => {
-                console.log('Connected to database...')
-                // console.log(result);
-            })
-            .catch((err) => {
-                console.log('Failed connecting to database ' + err.message)
-            });
-        const result =  await this.Genres.find()
-            .then((result) => {
-                // console.log("Return From Database: " + result)
-                return result;
-            })
-            .catch((err) => {
-                console.log(err.message)
-            })
-
-        return result;
+        let find = async () => {
+            return await this.Genres.find()
+                .then((result) => {
+                    return result;
+                })
+                .catch((err) => {
+                    console.log(err.message)
+                })
+        };
+        return await this.connection(find)
     }
 
     async findById (id) {
-        // await this._getConnection(()=>{return 'using nodemon'});
-        await this._getConnection()
-            .then((result) => {
-                console.log('Connected to database...')
-                // console.log(result);
-            })
-            .catch((err) => {
-                console.log('Failed connecting to database ' + err.message)
-            });
-        const result =  await this.Genres.findById(id)
-            .then((result) => {
-                // console.log("Return From Database: " + result)
-                return result;
-            })
-            .catch((err) => {
-                console.log(err.message)
-            })
-
-        return result;
+        let findById = async () => {
+            return await this.Genres.findById(id)
+                .then((result) => {
+                    return result;
+                })
+                .catch((err) => {
+                    console.log(err.message)
+                });
+        }
+        return await this.connection(findById);
     }
 }
 
