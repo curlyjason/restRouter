@@ -12,7 +12,7 @@ services:
   db:
     image: mongo:latest
     volumes:
-      - /data/mongo
+      - ./data:/data/db
       - ./mongo:/tmp/mongo
     restart: always
     environment:
