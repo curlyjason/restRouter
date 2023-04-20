@@ -1,21 +1,27 @@
 
-class GenresTable extends require('./Table.js') {
+class CustomersTable extends require('./Table.js') {
 
     joiSchema = this.Joi.object({
+        isGold: this.Joi.boolean(),
         name: this.Joi.string()
             .pattern(/^[a-zA-Z_ -]{3,100}$/)
             .required(),
+        phone: this.Joi.string()
+            .pattern(/[0-9()\-ext.]{10,22}/)
+            .required()
     });
 
     schema = new this.mongoose.Schema({
+        isGold: Boolean,
         name: String,
+        phone: String,
     })
 
-    Genres = this.mongoose.model('genres', this.schema);
+    Customers = this.mongoose.model('customers', this.schema);
 
     async find () {
         let find = async () => {
-            return await this.Genres.find()
+            return await this.Customers.find()
                 .then((result) => {
                     return result;
                 })
@@ -29,7 +35,7 @@ class GenresTable extends require('./Table.js') {
 
     async findById (id) {
         let findById = async () => {
-            return await this.Genres.findById(id)
+            return await this.Customers.findById(id)
                 .then((result) => {
                     return result;
                 })
@@ -43,7 +49,7 @@ class GenresTable extends require('./Table.js') {
 
     async save (data) {
         let save = async () => {
-            let entity = new this.Genres(data);
+            let entity = new this.Customers(data);
             return await entity.save();
         }
         return await this.connection(save);
@@ -64,4 +70,4 @@ class GenresTable extends require('./Table.js') {
     }
 }
 
-module.exports = new GenresTable();
+module.exports = new CustomersTable();
