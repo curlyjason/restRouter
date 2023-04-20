@@ -21,6 +21,7 @@ class GenresTable extends require('./Table.js') {
                 })
                 .catch((err) => {
                     console.log(err.message)
+                    return err;
                 })
         };
         return await this.connection(find)
@@ -34,6 +35,7 @@ class GenresTable extends require('./Table.js') {
                 })
                 .catch((err) => {
                     console.log(err.message)
+                    return err;
                 });
         }
         return await this.connection(findById);
