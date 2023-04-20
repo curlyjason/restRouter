@@ -1,7 +1,7 @@
 class GenresController
 {
 
-    Genres = require('../model/GenresTable');
+    Genres = require('../../model/GenresTable');
 
     /**
      * @returns {[{name: string, id: number},{name: string, id: number}]}

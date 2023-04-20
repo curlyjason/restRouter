@@ -4,7 +4,7 @@ const inflector = require("../utility/Inflect");
 
 function getController(controller, req, res) {
     try {
-        let className = '../controllers/' + inflector.capitalize(controller) + 'Controller';
+        let className = '../controllers/api/' + inflector.capitalize(controller) + 'Controller';
         return require(className);
     } catch (e) {
         console.log(e);
