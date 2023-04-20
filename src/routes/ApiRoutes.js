@@ -65,7 +65,7 @@ router.post('/:controller', async (req, res) => {
     return res.status(200).send(result);
 })
 
-apiPatchPutHandler = async (req, res)  =>{
+async function apiPatchPutHandler(req, res) {
     let controller = getController(req.params.controller);
     if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
     if(!contentIsJson(req)) return res.status(400).send("Request body must be 'application/json");
