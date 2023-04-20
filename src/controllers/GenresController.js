@@ -1,21 +1,7 @@
 class GenresController
 {
-    data = [
-        {id: 1, name: 'SciFi'},
-        {id: 2, name: 'Mystery'},
-    ]
-
-    Joi = require('joi');
-
-    schema = this.Joi.object({
-        name: this.Joi.string()
-            .pattern(/^[a-zA-Z_ -]{3,100}$/)
-            .required(),
-    });
 
     Genres = require('../model/GenresTable');
-
-
 
     /**
      * @returns {[{name: string, id: number},{name: string, id: number}]}
@@ -60,23 +46,6 @@ class GenresController
         else {
             return new Error('Record not found');
         }
-    }
-
-    findIndexOf(id) {
-        return this.data.findIndex(
-            (value,index,obj) => {
-                return value.id === +id;
-            }
-        )
-    }
-
-    /**
-     * @todo This should be abstracted to a 'Table'?
-     *
-     * @returns {*}
-     */
-    getNewId() {
-        return this.data[this.data.length - 1].id + 1;
     }
 }
 
