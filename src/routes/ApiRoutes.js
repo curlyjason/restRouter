@@ -68,11 +68,30 @@ router.post('/:controller', async (req, res) => {
 /**
  * edit
  */
-router.patch('/:controller/:id', edit)
+router.patch('/:controller/:id', async (req, res) => {
+    let controller = getController(req.params.controller);
+    if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
+    if(!contentIsJson(req)) return res.status(400).send("Request body must be 'application/json");
+
+    let result = await controller.edit(req.params.id, req.body);
+    if (!result) return res.status(404).send(`The requested ${req.params.controller} could not be found`);
+
+    return res.status(200).send(result);
+})
+
 /**
  * edit
  */
-router.put('/:controller/:id', edit)
+router.put('/:controller/:id',  async (req, res) => {
+    let controller = getController(req.params.controller);
+    if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
+    if(!contentIsJson(req)) return res.status(400).send("Request body must be 'application/json");
+
+    let result = await controller.edit(req.params.id);
+    if (!result) return res.status(404).send(`The requested ${req.params.controller} could not be found`);
+
+    return res.status(200).send(result);
+})
 
 /**
  * delete

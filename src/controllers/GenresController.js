@@ -11,7 +11,6 @@ class GenresController
         name: this.Joi.string()
             .pattern(/^[a-zA-Z_ -]{3,100}$/)
             .required(),
-        id: this.Joi.number()
     });
 
     Genres = require('../model/GenresTable');
@@ -48,37 +47,21 @@ class GenresController
         return await this.Genres.save(data);
     }
 
-    edit(id, data) {
-        let genre = this.findById(id);
-        genre.name = data.name;
-
-        let { error } = this.schema.validate(genre);
-        if(error) return {
-            error: error.message,
-            post_data: data
-        };
-
-        return genre;
+    async edit(id, data) {
+        let genre = await this.Genres.findById(id);
+        return await this.Genres.update(genre, data);
     }
 
-    delete(id) {
-        let index = this.findIndexOf(id);
-        if (!index) {return false}
-
-        let genre = {};
-        genre = Object.assign(genre, this.data[index]);
-
-        this.data.splice(index, 1);
-        return genre;
+    async delete(id) {
+        let genre = await this.Genres.findById(id);
+        if(genre){
+            return await this.Genres.delete(genre);
+        }
+        else {
+            return new Error('Record not found');
+        }
     }
 
-    findById(id) {
-        return this.data.find(
-            (value, index, collection) => {
-                return value.id === +id;
-            })
-    }
-    
     findIndexOf(id) {
         return this.data.findIndex(
             (value,index,obj) => {

@@ -5,7 +5,6 @@ class GenresTable extends require('./Table.js') {
         name: this.Joi.string()
             .pattern(/^[a-zA-Z_ -]{3,100}$/)
             .required(),
-        id: this.Joi.number()
     });
 
     genreSchema = new this.mongoose.Schema({
@@ -46,6 +45,20 @@ class GenresTable extends require('./Table.js') {
             return await genre.save();
         }
         return await this.connection(save);
+    }
+
+    async update (genre, data) {
+        let update = async () => {
+            return await genre.updateOne(data);
+        }
+        return await this.connection(update);
+    }
+
+    async delete (genre) {
+        let update = async () => {
+            return await genre.deleteOne();
+        }
+        return await this.connection(update);
     }
 }
 
