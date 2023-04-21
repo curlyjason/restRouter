@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 
 class MoviesTable extends require('./Table.js') {
 
@@ -11,7 +10,7 @@ class MoviesTable extends require('./Table.js') {
     schema = new this.mongoose.Schema({
         name: String,
         genre: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: this.mongoose.Schema.Types.ObjectId,
             ref: 'Genres'
         }
     })
