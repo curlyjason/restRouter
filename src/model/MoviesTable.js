@@ -1,18 +1,20 @@
 
 class MoviesTable extends require('./Table.js') {
-
+    GenresTable = require('./GenresTable');
     joiSchema = this.Joi.object({
         name: this.Joi.string()
             .pattern(/^[a-zA-Z_ -]{3,100}$/)
             .required(),
+        genres: this.Joi.array()
     });
 
+    // mongoose.model(genres, )
     schema = new this.mongoose.Schema({
         name: String,
-        genre: {
+        genres: [{
             type: this.mongoose.Schema.Types.ObjectId,
-            ref: 'Genres'
-        }
+            ref: 'genres'
+        }]
     })
 
     Movies = this.mongoose.model('movies', this.schema);
@@ -34,6 +36,8 @@ class MoviesTable extends require('./Table.js') {
     async findById (id) {
         let findById = async () => {
             return await this.Movies.findById(id)
+                .populate('genres')
+                .select('name genres')
                 .then((result) => {
                     return result;
                 })
