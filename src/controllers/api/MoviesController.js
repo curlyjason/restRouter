@@ -1,7 +1,7 @@
 class MoviesController
 {
 
-    Movies = require('../../model/GenresTable');
+    Movies = require('../../model/MoviesTable');
 
     /**
      * @returns {[{name: string, id: number},{name: string, id: number}]}

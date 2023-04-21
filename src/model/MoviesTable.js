@@ -11,7 +11,7 @@ class MoviesTable extends require('./Table.js') {
         name: String,
     })
 
-    Movies = this.mongoose.model('genres', this.schema);
+    Movies = this.mongoose.model('movies', this.schema);
 
     async find () {
         let find = async () => {
