@@ -5,12 +5,15 @@ class MoviesTable extends require('./Table.js') {
         name: this.Joi.string()
             .pattern(/^[a-zA-Z_ -]{3,100}$/)
             .required(),
+        numberInStock: this.Joi.number(),
+        dailyRentalRate: this.Joi.number(),
         genres: this.Joi.array()
     });
 
-    // mongoose.model(genres, )
     schema = new this.mongoose.Schema({
         name: String,
+        numberInStock: Number,
+        dailyRentalRate: Number,
         genres: [{
             type: this.mongoose.Schema.Types.ObjectId,
             ref: 'genres'
