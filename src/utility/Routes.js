@@ -30,7 +30,7 @@ function contentIsJson(req) {
 }
 
 function actionExists(controller, action) {
-    return typeof controller.action === "function";
+    return typeof controller[action] === 'function';
 }
 
 function parsePassedArgs(req) {

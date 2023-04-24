@@ -15,22 +15,18 @@ router.get('/:controller/:action', (req, res) => {
 })
 
 router.get('/:controller/:action/*', (req, res) => {
-    req.pass = req.params[0].split('/');
-    return res.status(200).send([req.params, req.query, req.pass]);
+    return routeHandler(req,res);
 })
 
 async function routeHandler(req, res) {
     req.params.action = req.params.action ?? 'index';
 
     let controller = utilities.getMVCController(req.params.controller)
-    // console.log(controller);
-    // console.log('fine');
-    // if(!controller) console.log('whack');
     if(!controller) return res.status(404).send(`${req.params.controller} has not been created`);
 
-    // if(!utilities.actionExists(controller, req.params.action)) {
-    //     return res.status(404).send(`${req.params.controller}.${req.params.action} has not been defined`);
-    // }
+    if(!utilities.actionExists(controller, req.params.action)) {
+        return res.status(404).send(`${req.params.controller}.${req.params.action} has not been defined`);
+    }
 
     utilities.parsePassedArgs(req);
 
