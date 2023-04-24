@@ -12,6 +12,18 @@ function getApiController(controller) {
     }
 };
 
+function getMVCController(controller) {
+    try {
+        let className = '../controllers/' + inflector.capitalize(controller) + 'Controller';
+        // console.log(className);
+        // return (className);
+        return require(className);
+    } catch (e) {
+        console.log(e);
+        return false;
+    }
+};
+
 function contentIsJson(req) {
     return req.header('content-type') === 'application/json'
         && req.body instanceof Object;
@@ -28,5 +40,6 @@ function parsePassedArgs(req) {
 
 module.exports.contentIsJson = contentIsJson;
 module.exports.getApiController = getApiController;
+module.exports.getMVCController = getMVCController;
 module.exports.actionExists = actionExists;
 module.exports.parsePassedArgs = parsePassedArgs;

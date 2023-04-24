@@ -2,10 +2,12 @@ const express = require('express');
 const router = express.Router();
 const utilities = require("../utility/Routes");
 
-router.get('/:controller', (req, res) => {
+router.get('/:controller', async(req, res) => {
+    console.log(':controller');
     req.params.action = req.params.action ?? 'index';
+    // console.log(routeHandler(req, res));
 
-    return routeHandler(req,res);
+    return await routeHandler(req,res);
 })
 
 router.get('/:controller/:action', (req, res) => {
@@ -20,8 +22,11 @@ router.get('/:controller/:action/*', (req, res) => {
 async function routeHandler(req, res) {
     req.params.action = req.params.action ?? 'index';
 
-    let controller = utilities.getController(req.params.controller)
-    if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
+    let controller = utilities.getMVCController(req.params.controller)
+    // console.log(controller);
+    // console.log('fine');
+    // if(!controller) console.log('whack');
+    if(!controller) return res.status(404).send(`${req.params.controller} has not been created`);
 
     // if(!utilities.actionExists(controller, req.params.action)) {
     //     return res.status(404).send(`${req.params.controller}.${req.params.action} has not been defined`);
