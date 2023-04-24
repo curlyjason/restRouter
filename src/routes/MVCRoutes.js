@@ -1,15 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const inflector = require("../utility/Inflect");
+const utilities = require("../utility/Routes");
 
-router.get('/:controller/:action', (req, res) => {
-    return res.status(200).send([req.params, req.query, req.pass]);
-})
 router.get('/:controller', (req, res) => {
     req.params.action = req.params.action ?? 'index';
 
-    return res.status(200).send([req.params, req.query, req.pass]);
+    return routeHandler(req,res);
 })
+
+router.get('/:controller/:action', (req, res) => {
+    return routeHandler(req,res);
+})
+
 router.get('/:controller/:action/*', (req, res) => {
     req.pass = req.params[0].split('/');
     return res.status(200).send([req.params, req.query, req.pass]);
@@ -18,19 +20,16 @@ router.get('/:controller/:action/*', (req, res) => {
 async function routeHandler(req, res) {
     req.params.action = req.params.action ?? 'index';
 
-    let controller = locateController(req)
+    let controller = utilities.getController(req.params.controller)
     if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
 
-    let actionExists = validate(controller, req.params.action)
-    if(!actionExists) return res.status(404).send(`${req.params.controller} could not be found`);
+    // if(!utilities.actionExists(controller, req.params.action)) {
+    //     return res.status(404).send(`${req.params.controller}.${req.params.action} has not been defined`);
+    // }
 
-    parsePassArgs(req);
+    utilities.parsePassedArgs(req);
 
-
-}
-
-function parsePassArgs(req) {
-
+    return res.status(200).send([req.params, req.query, req.pass]);
 }
 
 // function getController(controller, req, res) {
