@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const utilities = require("./RouteUtilities");
+const utilities = require("../utility/Routes");
 
 
 function edit(req, res) {

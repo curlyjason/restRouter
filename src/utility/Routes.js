@@ -1,4 +1,4 @@
-const inflector = require("../utility/Inflect");
+const inflector = require("./Inflect");
 
 function getController(controller, req, res) {
     try {
