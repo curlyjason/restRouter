@@ -1,8 +1,10 @@
 const inflector = require("./Inflect");
 
-function getController(controller, req, res) {
+function getApiController(controller) {
     try {
-        let className = '../controllers/' + inflector.capitalize(controller) + 'Controller';
+        let className = '../controllers/api/' + inflector.capitalize(controller) + 'Controller';
+        console.log(className);
+        // return (className);
         return require(className);
     } catch (e) {
         console.log(e);
@@ -15,5 +17,16 @@ function contentIsJson(req) {
         && req.body instanceof Object;
 }
 
+function actionExists(controller, action) {
+    return typeof controller.action === "function";
+}
+
+function parsePassedArgs(req) {
+    if (req.params[0] === undefined) {req.params[0] = ''}
+    req.pass = req.params[0].split('/');
+}
+
 module.exports.contentIsJson = contentIsJson;
-module.exports.getController = getController;
+module.exports.getApiController = getApiController;
+module.exports.actionExists = actionExists;
+module.exports.parsePassedArgs = parsePassedArgs;
