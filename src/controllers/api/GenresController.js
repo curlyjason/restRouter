@@ -49,4 +49,4 @@ class GenresController
     }
 }
 
-module.exports = new GenresController();
+module.exports = GenresController;
