@@ -12,10 +12,8 @@ function getApiController(controller) {
 
 function getMVCController(controller) {
     try {
-        let className = '../controllers/' + inflector.capitalize(controller) + 'Controller';
-        // console.log(className);
-        // return (className);
-        return require(className);
+        let classPath = '../controllers/' + inflector.capitalize(controller) + 'Controller';
+        return new (require(classPath))();
     } catch (e) {
         console.log(e);
         return false;

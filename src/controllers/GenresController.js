@@ -1,7 +1,6 @@
 
-const GenreApi = require('./api/GenresController.js');
 
-class GenresController {
+class GenresController extends require('./api/GenresController') {
 
     index () {
         return 'string';
@@ -9,4 +8,4 @@ class GenresController {
 
 }
 
-module.exports = new GenresController()
+module.exports = GenresController
