@@ -2,14 +2,16 @@
 class Controller {
 
     alias = null;
+    View = null;
 
-    constructor() {
     constructor(req = null, res = null, config = null) {
         this.req = req;
         this.res = res;
         this.alias = this.constructor.name.replace('Controller', '');
-        this[this.alias] = require(`../model/${this.alias}Table`)
-        // console.log(this.defaultEntity());
+        this[this.alias] = require(`../model/${this.alias}Table`);
+        this.View = new (require('../views/View'))(
+            {controller: this}
+        )
     }
 
 
@@ -69,6 +71,10 @@ class Controller {
 
     defaultEntity() {
         return this.alias.toLowerCase().replace(/s$/, '');
+    }
+
+    set(vars) {
+        this.View.addVars(vars);
     }
 
 }
