@@ -1,14 +1,12 @@
-class GenresController
+class GenresController extends require('../Controller')
 {
-
-    Genres = require('../../model/GenresTable');
 
     /**
      * @returns {[{name: string, id: number},{name: string, id: number}]}
      */
     async index() {
         console.log('waiting...');
-        return await this.Genres.find();
+        return await this.defaultTable().find();
     }
 
     /**
@@ -16,7 +14,7 @@ class GenresController
      * @returns {{name: string, id: number}|{name: string, id: number}} | undefined
      */
     async view(id) {
-        return await this.Genres.findById(id);
+        return await this.defaultTable().findById(id);
     }
 
     /**
@@ -24,24 +22,24 @@ class GenresController
      * @returns {{name, id: *}}
      */
     async add(data) {
-        let { error } = this.Genres.joiSchema.validate(data);
+        let { error } = this.defaultTable().joiSchema.validate(data);
         if(error) return {
             error: error.message,
             post_data: data
         };
 
-        return await this.Genres.save(data);
+        return await this.defaultTable().save(data);
     }
 
     async edit(id, data) {
-        let genre = await this.Genres.findById(id);
-        return await this.Genres.update(genre, data);
+        let entity = await this.defaultTable().findById(id);
+        return await this.defaultTable().update(entity, data);
     }
 
     async delete(id) {
-        let genre = await this.Genres.findById(id);
-        if(genre){
-            return await this.Genres.delete(genre);
+        let entity = await this.defaultTable().findById(id);
+        if(entity){
+            return await this.defaultTable().delete(entity);
         }
         else {
             return new Error('Record not found');
