@@ -41,14 +41,20 @@ class Controller {
     }
 
     async edit(id, data) {
-        let entity = await this.defaultTable().findById(id);
-        return await this.defaultTable().update(entity, data);
+        try {
+            let entity = await this.defaultTable().findById(id);
+            await this.defaultTable().update(entity, data);
+            return entity;
+        } catch (e) {
+            return e;
+        }
     }
 
     async delete(id) {
         let entity = await this.defaultTable().findById(id);
-        if(entity){
-            return await this.defaultTable().delete(entity);
+        if(entity && await this.defaultTable().delete(entity)){
+            // console.log(entity);
+            return entity;
         }
         else {
             return new Error('Record not found');
