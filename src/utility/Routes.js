@@ -10,10 +10,10 @@ function getApiController(controller) {
     }
 };
 
-function getMVCController(controller) {
+function getMVCController(req, res) {
     try {
-        let classPath = '../controllers/' + inflector.capitalize(controller) + 'Controller';
-        return new (require(classPath))();
+        let classPath = '../controllers/' + inflector.capitalize(req.params.controller) + 'Controller';
+        return new (require(classPath))(req, res);
     } catch (e) {
         console.log(e);
         return false;

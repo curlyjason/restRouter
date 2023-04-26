@@ -21,7 +21,7 @@ router.get('/:controller/:action/*', (req, res) => {
 async function routeHandler(req, res) {
     req.params.action = req.params.action ?? 'index';
 
-    let controller = utilities.getMVCController(req.params.controller)
+    let controller = utilities.getMVCController(req, res)
     if(!controller) return res.status(404).send(`${req.params.controller} has not been created`);
 
     if(!utilities.actionExists(controller, req.params.action)) {

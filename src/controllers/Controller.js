@@ -4,6 +4,9 @@ class Controller {
     alias = null;
 
     constructor() {
+    constructor(req = null, res = null, config = null) {
+        this.req = req;
+        this.res = res;
         this.alias = this.constructor.name.replace('Controller', '');
         this[this.alias] = require(`../model/${this.alias}Table`)
         // console.log(this.defaultEntity());
