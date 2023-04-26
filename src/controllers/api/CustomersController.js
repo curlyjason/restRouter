@@ -1,4 +1,4 @@
-class CustomersController
+class CustomersController extends require('../Controller')
 {
 
 }

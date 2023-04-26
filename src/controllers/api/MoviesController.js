@@ -1,4 +1,4 @@
-class MoviesController
+class MoviesController extends require('../Controller')
 {
 
 }
