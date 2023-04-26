@@ -1,10 +1,6 @@
 
 
-class GenresController extends require('./api/GenresController') {
-
-    index () {
-        return 'string';
-    }
+class GenresController extends require('./Controller') {
 
 }
 
