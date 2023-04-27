@@ -19,8 +19,6 @@ class View {
     async render(template = null) {
         template = template ?? this._defaultTemplatePath();
         let code = Object.assign(require(template), this.vars);
-        // let code = require(template);
-        console.log(code);
         let layout = require('./layouts/default');
 
         let output = layout.replace('{{title}}', this.title)
@@ -28,7 +26,6 @@ class View {
             .replace('{{css}}', this.css)
             .replace('{{content}}', await code.run());
 
-        console.log(output);
         return output;
     }
 
