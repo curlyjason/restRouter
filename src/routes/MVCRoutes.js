@@ -30,7 +30,7 @@ async function routeHandler(req, res) {
 
     utilities.parsePassedArgs(req);
 
-    return res.status(200).send([req.params, req.query, req.pass]);
+    return res.status(200).send(await controller[req.params.action]()/*[req.params, req.query, req.pass]*/);
 }
 
 module.exports = router;
