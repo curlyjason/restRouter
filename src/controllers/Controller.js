@@ -20,7 +20,6 @@ class Controller {
      * @returns {[{name: string, id: number},{name: string, id: number}]}
      */
     async index() {
-        console.log('waiting...');
         return await this.defaultTable().find();
     }
 
