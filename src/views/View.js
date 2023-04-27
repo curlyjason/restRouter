@@ -16,19 +16,24 @@ class View {
         this.title = `${this.controller.req.params.controller}/${this.controller.req.params.action}`;
     }
 
-    render(template = null) {
+    async render(template = null) {
         template = template ?? this._defaultTemplatePath();
         let code = Object.assign(require(template), this.vars);
-        let layout = require('layouts/default');
-        
-        return layout.replace('{{title}}', this.title)
+        // let code = require(template);
+        console.log(code);
+        let layout = require('./layouts/default');
+
+        let output = layout.replace('{{title}}', this.title)
             .replace('{{scripts}}', this.scripts)
             .replace('{{css}}', this.css)
-            .replace('{{content}}', code.run());
+            .replace('{{content}}', await code.run());
+
+        console.log(output);
+        return output;
     }
 
     _defaultTemplatePath(path = null) {
-        return `./${this.controller.alias}/${this.controller.req.params.action}.js`;
+        return `./templates/${this.controller.alias}/${this.controller.req.params.action}.js`;
     }
 
     addVars(vars) {
