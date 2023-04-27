@@ -1,14 +1,13 @@
 
 const Html = require('../../helpers/HtmlHelper');
 
-console.log(Html)
-
 async function run() {
-    let accum =
-        Html.p(this.one)
-        + Html.p(this.two)
-        + Html.p(this.three)
-        /*+ Html.propertiesToUL(this.genres)*/;
+    let accum = '';
+    let genres = await this.genres;
+    for(let i = 0; i < genres.length; i++) {
+        console.log(genres[i]);
+        accum += Html.table(genres[i]);
+    }
 
     return accum;
 }
