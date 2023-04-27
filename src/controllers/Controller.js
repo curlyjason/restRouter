@@ -12,7 +12,6 @@ class Controller {
         this.View = new (require('../views/View'))(
             {controller: this}
         )
-        console.log(Object.assign(this.View.vars, {two: 'four', three: 'six'}));
     }
 
 
