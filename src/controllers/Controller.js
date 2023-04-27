@@ -12,6 +12,8 @@ class Controller {
         this.View = new (require('../views/View'))(
             {controller: this}
         )
+        this.allowedKeys = Object.keys(this[this.alias].schema.paths);
+        this.set({allowedKeys: this.allowedKeys});
     }
 
 
