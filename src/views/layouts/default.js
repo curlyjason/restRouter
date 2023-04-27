@@ -14,4 +14,4 @@ const layout = `
 </html>
 `;
 
-module.exports.layout = layout;
+module.exports = layout;
