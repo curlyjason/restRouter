@@ -2,14 +2,18 @@
 const Html = require('../../helpers/HtmlHelper');
 
 async function run() {
-    let accum = '';
     let genres = await this.genres;
+    let accum = `<table>
+        <tbody>
+            ${Html.tHeaders(this.allowedKeys)}`;
+
     for(let i = 0; i < genres.length; i++) {
-        console.log(genres[i]);
-        accum += Html.table(genres[i]);
+        accum += Html.tCells(genres[i], this.allowedKeys);
     }
 
-    return accum;
+    return accum + `
+    </tbody>
+</table>`;
 }
 
 module.exports.run = run;
