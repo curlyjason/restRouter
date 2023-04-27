@@ -3,9 +3,7 @@ const router = express.Router();
 const utilities = require("../utility/Routes");
 
 router.get('/:controller', async(req, res) => {
-    console.log(':controller');
     req.params.action = req.params.action ?? 'index';
-    // console.log(routeHandler(req, res));
 
     return await routeHandler(req,res);
 })
@@ -30,7 +28,7 @@ async function routeHandler(req, res) {
 
     utilities.parsePassedArgs(req);
 
-    return res.status(200).send(await controller[req.params.action]()/*[req.params, req.query, req.pass]*/);
+    return res.status(200).send(await controller[req.params.action]());
 }
 
 module.exports = router;
