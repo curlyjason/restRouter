@@ -3,12 +3,17 @@ function p(content) {
     return `<p>${content}</p>`;
 }
 
-function tCells(obj, keys) {
+function tCells(obj, keys, handlers = {}) {
     // return `<tr><td>${obj.name}</td></tr>`;
     let accum = '<tr>';
 
     for (let key of keys) {
-        accum += `<td>${obj[key]}</td>`;
+        if (typeof handlers[key] === "function") {
+            accum += '<td>' + handlers[key](obj) + '</td>';
+        }
+        else {
+            accum += `<td>${obj[key]}</td>`;
+        }
     }
 
     return accum + '</tr>';
@@ -41,4 +46,4 @@ function link(label, url) {
     return `<a href="${url}">${label}</a>`;
 }
 
-module.exports = {p, tBody, tCells, tHeaders, table};
+module.exports = {p, tBody, tCells, tHeaders, table, link};
