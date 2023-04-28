@@ -14,7 +14,7 @@ function getAddLink(genre) {
 
 function getEditLink(genre) {
     return Html.p(
-        Html.link('Edit', `edit/${genre._id}`)
+        Html.link('Edit', `/genres/edit/${genre._id}`)
     )
 }
 
