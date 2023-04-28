@@ -1,6 +1,12 @@
 
 const Html = require('../../helpers/HtmlHelper');
 
+function getViewLink() {
+    return (obj) => {
+        return Html.link(obj._id, `view/${obj._id}`)
+    };
+}
+
 async function run() {
     let genres = await this.genres;
     let accum = `
@@ -16,7 +22,7 @@ ${Html.link('New Genre', 'add/')}
                 genres[i],
                 this.allowedKeys,
                 {
-                    _id: (obj) => {return Html.link(obj._id, `view/${obj._id}`)}
+                    _id: getViewLink()
                 }
             );
         }
