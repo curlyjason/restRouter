@@ -4,6 +4,9 @@ const Html = require('../../helpers/HtmlHelper');
 async function run() {
     let genres = await this.genres;
     let accum = `
+
+${Html.link('New Genre', 'add/')}
+
 <table>
     <tbody>
         ${Html.tHeaders(this.allowedKeys)}`;
@@ -21,6 +24,7 @@ async function run() {
     return accum + `
     </tbody>
 </table>
+
 `;
 }
 
