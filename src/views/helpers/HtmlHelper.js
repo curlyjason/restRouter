@@ -13,6 +13,7 @@ function tCells(obj, keys) {
 
     return accum + '</tr>';
 }
+
 function tHeaders(keys) {
     // return `<!--<tr><th>'name'</th></tr>-->`;
     let accum = '<tr>';
@@ -34,6 +35,10 @@ function table(obj, keys) {
     return `<table>
         ${this.tBody(obj, keys)}
     </table>`;
+}
+
+function link(label, url) {
+    return `<a href="${url}">${label}</a>`;
 }
 
 module.exports = {p, tBody, tCells, tHeaders, table};
