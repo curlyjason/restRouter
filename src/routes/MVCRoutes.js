@@ -8,13 +8,27 @@ router.get('/:controller', async(req, res) => {
     return await routeHandler(req,res);
 })
 
-router.get('/:controller/:action', (req, res) => {
+router.all('/:controller/:action', (req, res) => {
     return routeHandler(req,res);
 })
 
-router.get('/:controller/:action/*', (req, res) => {
-    return routeHandler(req,res);
-})
+router.route('/:controller/:action/*')
+    .get((req, res) => {
+        return routeHandler(req,res);
+    })
+    .post((req, res) => {
+        return routeHandler(req,res);
+    })
+    .put((req, res) => {
+        return routeHandler(req,res);
+    })
+    .patch((req, res) => {
+        return routeHandler(req,res);
+    })
+
+// router.('/:controller/:action/*', (req, res) => {
+//     return routeHandler(req,res);
+// })
 
 async function routeHandler(req, res) {
     req.params.action = req.params.action ?? 'index';
