@@ -6,7 +6,18 @@ async function run() {
     let genre = await this.genre;
     let accum = '';
 
-    accum += Form.create(genre, `/genres/edit/${genre._id}`, {method: 'PATCH'});
+    accum += Form.create(genre, `/genres/edit/${genre._id}`, {method: 'post'});
+    accum += '<input ' +
+        'type="text" ' +
+        'name="name" ' +
+        'required="required" ' +
+        'data-validity-message="This field cannot be left empty" ' +
+        'oninvalid="this.setCustomValidity(\'\'); ' +
+        'if (!this.value) this.setCustomValidity(this.dataset.validityMessage)" ' +
+        'oninput="this.setCustomValidity(\'\')" ' +
+        'id="name" ' +
+        'value="Amp Printing" ' +
+        'maxlength="100">'
     accum += Form.submit();
     accum += Form.end();
 
