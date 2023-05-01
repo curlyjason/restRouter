@@ -14,10 +14,9 @@ class GenresController extends require('./Controller') {
 
     async edit(id) {
         this.set({genre: super.view(id)})
-        console.log(this.req.method);
-        if (this.req.method === 'PATCH' || this.req.method === 'PUT') {
-            this.set({genre: super.edit(id)})
-            console.log('processing put/patch')
+        if (this.req.method === 'POST') {
+            console.log(`recieved edit request: ${this.req.body.name}`);
+            // this.set({genre: super.edit(id)})
         }
         return this.View.render();
     }
