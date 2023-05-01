@@ -16,7 +16,7 @@ async function run() {
         'if (!this.value) this.setCustomValidity(this.dataset.validityMessage)" ' +
         'oninput="this.setCustomValidity(\'\')" ' +
         'id="name" ' +
-        'value="Amp Printing" ' +
+        `value="${genre.name}" ` +
         'maxlength="100">'
     accum += Form.submit();
     accum += Form.end();
