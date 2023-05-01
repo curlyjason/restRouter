@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const utilities = require("../utility/Routes");
+const bodyParser = require('body-parser');
+router.use(bodyParser.urlencoded({ extended: true }));
 
 router.get('/:controller', async(req, res) => {
     req.params.action = req.params.action ?? 'index';
@@ -14,8 +16,7 @@ router.all('/:controller/:action', (req, res) => {
 
 router.route('/:controller/:action/*')
     .get((req, res) => {
-        return routeHandler(req,res);
-    })
+        return routeHandler(req,res);    })
     .post((req, res) => {
         return routeHandler(req,res);
     })
