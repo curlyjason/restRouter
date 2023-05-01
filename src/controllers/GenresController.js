@@ -20,6 +20,15 @@ class GenresController extends require('./Controller') {
         }
         return this.View.render();
     }
+
+    async add() {
+        // this.set({genre: super.view(id)})
+        if (this.req.method === 'POST') {
+            console.log(`recieved add request: ${this.req.body.name}`);
+            this.set({genre: super.add({name: this.req.body.name})});
+        }
+        return this.View.render();
+    }
 }
 
 module.exports = GenresController
