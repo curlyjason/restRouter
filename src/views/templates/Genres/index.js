@@ -3,7 +3,7 @@ const Html = require('../../helpers/HtmlHelper');
 
 function getViewLink() {
     return (obj) => {
-        return Html.link(obj._id, `view/${obj._id}`)
+        return Html.link(obj._id, `/genres/view/${obj._id}`)
     };
 }
 

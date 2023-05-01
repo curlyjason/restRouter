@@ -8,7 +8,7 @@ function getIndexLink(genre) {
 
 function getAddLink(genre) {
     return Html.p(
-        Html.link('New', 'add/')
+        Html.link('New', '/genres/add/')
     )
 }
 
@@ -20,7 +20,7 @@ function getEditLink(genre) {
 
 function getDeleteLink(genre) {
     return Html.p(
-        Html.link('Delete', `edit/${genre._id}`)
+        Html.link('Delete', `/genres/delete/${genre._id}`)
     )
 }
 
