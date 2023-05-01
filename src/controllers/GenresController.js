@@ -16,7 +16,11 @@ class GenresController extends require('./Controller') {
         this.set({genre: super.view(id)})
         if (this.req.method === 'POST') {
             console.log(`recieved edit request: ${this.req.body.name}`);
-            this.set({genre: super.edit(id, {name: this.req.body.name})});
+            await super.edit(id, this.req.body);
+            return {
+                "status" : 302,
+                "url" : '/genres/'
+            }
         }
         return this.View.render();
     }
