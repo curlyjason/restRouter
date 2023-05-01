@@ -43,7 +43,15 @@ async function routeHandler(req, res) {
 
     utilities.parsePassedArgs(req);
 
-    return res.status(200).send(await controller[req.params.action](...req.pass ?? []));
+    let response = await controller[req.params.action](...req.pass ?? []);
+
+    if(typeof response === 'string') {
+       return res.status(200).send(response);
+    }
+    else {
+        res.writeHead(response.status, { Location: response.url });
+        return res.end();
+    }
 }
 
 module.exports = router;

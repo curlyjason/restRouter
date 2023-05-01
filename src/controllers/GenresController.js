@@ -22,10 +22,13 @@ class GenresController extends require('./Controller') {
     }
 
     async add() {
-        // this.set({genre: super.view(id)})
         if (this.req.method === 'POST') {
-            console.log(`recieved add request: ${this.req.body.name}`);
-            this.set({genre: super.add({name: this.req.body.name})});
+            console.log(`received add request: ${this.req.body.name}`);
+            super.add({name: this.req.body.name});
+            return {
+                "status" : 302,
+                "url" : '/genres/'
+            }
         }
         return this.View.render();
     }
