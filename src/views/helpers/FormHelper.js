@@ -19,4 +19,17 @@ function submit(label) {
 `;
 }
 
-module.exports = {create, end, submit}
+function checkboxes(field, options = [], selected = []) {
+    let input = '';
+    for (const [index, option] of options.entries()) {
+        let checked = '';
+        if(selected.some(({_id}) => _id.toString() === option.id)){
+            checked = 'checked';
+        }
+        input += `<input type="checkbox" id="${field}${index}" name="${field}[]" value="${option.id}" ${checked}>
+        <label htmlFor="${field}${index}">${option.name}</label><br>`
+    }
+    return input;
+}
+
+module.exports = {create, end, submit, checkboxes}
