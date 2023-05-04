@@ -49,6 +49,14 @@ router.post('/:controller', async (req, res) => {
     if (!result) return res.status(404).send(`The requested ${req.params.controller} could not be found`);
 
     return res.status(200).send(result);
+
+    //refactor
+    // try {
+    //     let result = await controller.add(req.body);
+    //     return res.status(result.status).send(result.body);
+    // } catch (e) {
+    //     return res.status(500).send("Controller add failed.");
+    // }
 })
 
 async function apiPatchPutHandler(req, res) {
