@@ -9,7 +9,8 @@ async function run() {
     accum += Html.p(this.error ?? '');
 
     accum += Form.create(customer, `/customers/add/`, {method: 'post'});
-    accum += '<input ' +
+    accum += `<label htmlFor="name">Name</label><br>` +
+        '<input ' +
         'type="text" ' +
         'name="name" ' +
         'required="required" ' +

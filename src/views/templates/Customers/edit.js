@@ -9,7 +9,8 @@ async function run() {
     accum += Html.p(this.error ?? '');
 
     accum += Form.create(customer, `/customers/edit/${customer._id}`, {method: 'post'});
-    accum += '<input ' +
+    accum += `<label htmlFor="name">Name</label><br>` +
+        '<input ' +
         'type="text" ' +
         'name="name" ' +
         'required="required" ' +
@@ -18,7 +19,7 @@ async function run() {
         'if (!this.value) this.setCustomValidity(this.dataset.validityMessage)" ' +
         'oninput="this.setCustomValidity(\'\')" ' +
         'id="name" ' +
-        `value="${customer.name}" ` +
+        `value="${customer.name ?? ''}" ` +
         'maxlength="100">'
     accum += Form.submit();
     accum += Form.end();
