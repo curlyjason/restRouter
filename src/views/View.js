@@ -6,6 +6,7 @@ class View {
     title = 'Sample Page';
     scripts = '';
     css = '';
+    layout = './layouts/default';
 
     layout = './layouts/default.js';
 
@@ -19,7 +20,7 @@ class View {
     async render(template = null) {
         template = template ?? this._defaultTemplatePath();
         let code = Object.assign(require(template), this.vars);
-        let layout = require('./layouts/default');
+        let layout = require(this.layout);
 
         let output = layout.replace('{{title}}', this.title)
             .replace('{{scripts}}', this.scripts)
@@ -35,6 +36,10 @@ class View {
 
     addVars(vars) {
         this.vars = Object.assign(this.vars, vars);
+    }
+
+    setLayout(path) {
+        this.layout = path;
     }
 
 }
