@@ -15,6 +15,7 @@ class CustomersTable extends require('./Table.js') {
         isGold: Boolean,
         name: String,
         phone: String,
+        totalRentals: Number
     })
 
     Customers = this.mongoose.model('customers', this.schema);
