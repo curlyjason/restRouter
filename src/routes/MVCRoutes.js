@@ -27,9 +27,6 @@ router.route('/:controller/:action/*')
         return routeHandler(req,res);
     })
 
-// router.('/:controller/:action/*', (req, res) => {
-//     return routeHandler(req,res);
-// })
 
 async function routeHandler(req, res) {
     req.params.action = req.params.action ?? 'index';
