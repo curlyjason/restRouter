@@ -1,9 +1,17 @@
-
+/**
+ * Class implementing baseline API methods
+ */
 class Controller {
 
     alias = null;
     View = null;
 
+    /**
+     * constructor
+     * @param req
+     * @param res
+     * @param config
+     */
     constructor(req = null, res = null, config = null) {
         this.req = req;
         this.res = res;
@@ -18,6 +26,8 @@ class Controller {
 
 
     /**
+     * get a collection
+     *
      * @returns {[{name: string, id: number},{name: string, id: number}]}
      */
     async index() {
@@ -25,7 +35,9 @@ class Controller {
     }
 
     /**
-     * @param id
+     * view a single document
+     *
+     * @param id {number}
      * @returns {{name: string, id: number}|{name: string, id: number}} | undefined
      */
     async view(id) {
@@ -33,6 +45,8 @@ class Controller {
     }
 
     /**
+     * add a new documents
+     *
      * @param {{name}} data
      * @returns {{name, id: *}}
      */
