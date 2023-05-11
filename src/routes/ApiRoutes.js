@@ -4,7 +4,7 @@ const utilities = require("../utility/Routes");
 
 
 function edit(req, res) {
-    let controller = utilities.getApiController(req.params.controller);
+    let controller = utilities.getApiController(req, res);
     if (!controller) return res.status(404).send(`${req.params.controller} could not be found`);
     if (!utilities.contentIsJson(req)) return res.status(400).send("Request body must be 'application/json");
 
@@ -18,7 +18,7 @@ function edit(req, res) {
  * index
  */
 router.get('/:controller', async (req, res) => {
-    let controller = utilities.getApiController(req.params.controller);
+    let controller = utilities.getApiController(req, res);
     if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
 
     return res.send(await controller.index());
@@ -28,7 +28,7 @@ router.get('/:controller', async (req, res) => {
  * view
  */
 router.get('/:controller/:id', async (req, res) => {
-    let controller = utilities.getApiController(req.params.controller);
+    let controller = utilities.getApiController(req, res);
     if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
 
     let result = await controller.view(req.params.id);
@@ -41,7 +41,7 @@ router.get('/:controller/:id', async (req, res) => {
  * add
  */
 router.post('/:controller', async (req, res) => {
-    let controller = utilities.getApiController(req.params.controller);
+    let controller = utilities.getApiController(req, res);
     if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
     if(!utilities.contentIsJson(req)) return res.status(400).send("Request body must be 'application/json");
 
@@ -60,7 +60,7 @@ router.post('/:controller', async (req, res) => {
 })
 
 async function apiPatchPutHandler(req, res) {
-    let controller = utilities.getApiController(req.params.controller);
+    let controller = utilities.getApiController(req, res);
     if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
     if(!utilities.contentIsJson(req)) return res.status(400).send("Request body must be 'application/json");
 
@@ -84,7 +84,7 @@ router.put('/:controller/:id',  apiPatchPutHandler)
  * delete
  */
 router.delete('/:controller/:id', (req, res) => {
-    let controller = utilities.getApiController(req.params.controller);
+    let controller = utilities.getApiController(req, res);
     if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
 
     let result = controller.delete(req.params.id);

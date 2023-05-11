@@ -1,9 +1,9 @@
 const inflector = require("./Inflect");
 
-function getApiController(controller) {
+function getApiController(req, res) {
     try {
-        let classPath = '../controllers/api/' + inflector.capitalize(controller) + 'Controller';
-        return new (require(classPath))();
+        let classPath = '../controllers/api/' + inflector.capitalize(req.params.controller) + 'Controller';
+        return new (require(classPath))(req, res);
     } catch (e) {
         console.log(e);
         return false;
