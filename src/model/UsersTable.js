@@ -18,9 +18,9 @@ class UsersTable extends require('./Table.js') {
 
     Users = this.mongoose.model('users', this.schema);
 
-    async find () {
+    async find (object = {}) {
         let find = async () => {
-            return await this.Users.find()
+            return await this.Users.find(object)
                 .then((result) => {
                     return result;
                 })
