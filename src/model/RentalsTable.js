@@ -62,22 +62,22 @@ class RentalsTable extends require('./Table.js') {
     async save (data) {
         let save = async () => {
             let entity = new this.Rentals(data);
-            try {
-                this.Fawn.Task()
-                    .save('rentals', entity)
-                    .update('movies', {_id: data.movies._id}, {
-                        $inc: {numberInStock: -1}
-                    })
-                    .update('customers', {_id: data.customer._id}, {
-                        $inc: {totalRentals: 1}
-                    })
-                    .run();
-                return entity;
-            } catch (error) {
-                return error;
-            }
+            // try {
+            //     this.Fawn.Task()
+            //         .save('rentals', entity)
+            //         .update('movies', {_id: data.movies._id}, {
+            //             $inc: {numberInStock: -1}
+            //         })
+            //         .update('customers', {_id: data.customer._id}, {
+            //             $inc: {totalRentals: 1}
+            //         })
+            //         .run();
+            //     return entity;
+            // } catch (error) {
+            //     return error;
+            // }
 
-            // return await entity.save();
+            return await entity.save();
         }
         return await this.connection(save);
     }

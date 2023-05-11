@@ -2,7 +2,7 @@
 class Table {
 
     mongoose = require("mongoose");
-    Fawn = require("fawn");
+    // Fawn = require("fawn");
     mongo = this.mongoose.mongo;
 
     database = 'vidly';
@@ -10,7 +10,7 @@ class Table {
     Joi = require('joi');
 
     constructor() {
-        this.Fawn.init(this.mongoose);
+        // this.Fawn.init(this.mongoose);
     }
 
     async connection(callback) {
