@@ -1,10 +1,11 @@
+
 /**
  * Class implementing baseline API methods
  */
 class Controller {
-
     alias = null;
     View = null;
+    lo = require('lodash');
 
     /**
      * constructor

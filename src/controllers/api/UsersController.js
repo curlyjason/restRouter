@@ -1,5 +1,6 @@
 class UsersController extends require('../Controller')
 {
+    bcrypt = require('bcrypt');
     async add(data) {
         const User = this.defaultTable();
         let { error } = User.joiSchema.validate(data);
@@ -20,7 +21,12 @@ class UsersController extends require('../Controller')
             };
         }
 
-        return await User.save(data);
+        const salt = await this.bcrypt.genSalt(10);
+        data.password = await this.bcrypt.hash(data.password, salt);
+
+        user = await User.save(data);
+
+        return this.lo.pick(user, ['name', 'email']);
     }
 
 }
