@@ -2,14 +2,9 @@
 class UsersTable extends require('./Table.js') {
 
     joiSchema = this.Joi.object({
-        name: this.Joi.string()
-            .pattern(/^[a-zA-Z_ -]{3,100}$/)
-            .required(),
-        email: this.Joi.string()
-            .pattern(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
-            .required(),
-        password: this.Joi.string()
-            .required()
+        name: this.Joi.string().pattern(/^[a-zA-Z_ -]{3,100}$/).required(),
+        email: this.Joi.string().required().email(),
+        password: this.Joi.string().required()
     });
 
     schema = new this.mongoose.Schema({
