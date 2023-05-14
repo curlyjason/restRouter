@@ -35,6 +35,25 @@ class UsersController extends require('./Controller') {
         }
         return this.View.render();
     }
+
+    async auth() {
+        if (this.req.method === 'POST') {
+            const valid = (value) => {
+                return typeof value === "string" && value.length > 0;
+            }
+            const {email, password} = this.req.body;
+
+            if (!(valid(email) && valid(password))) return 'email and password are required';
+            // if (!(valid(email) && valid(password))) return {
+            //     error: 'email and password are required',
+            //     post_data: this.req.body
+            // }
+            return "valid post data received";
+        }
+        return 'GET falls through to rendering';
+    }
 }
+
+
 
 module.exports = UsersController

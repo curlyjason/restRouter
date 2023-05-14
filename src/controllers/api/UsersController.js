@@ -29,6 +29,16 @@ class UsersController extends require('../Controller')
         return this.lo.pick(user, ['name', 'email']);
     }
 
+    // async auth() {
+    //     const valid = (value) => {
+    //         return typeof value === "string" && value.length > 0;
+    //     }
+    //     const {email, password} = this.req.body;
+    //
+    //     if (!(valid(email) && valid(password))) return 'email and password are required';
+    //
+    // }
+
 }
 
 module.exports = UsersController;
