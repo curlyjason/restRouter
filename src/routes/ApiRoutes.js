@@ -15,7 +15,9 @@ function edit(req, res) {
 }
 
 /**
- * index
+ * index / get a page of records
+ *
+ * @return {Response}
  */
 router.get('/:controller', async (req, res) => {
     let controller = utilities.getApiController(req, res);
@@ -25,7 +27,9 @@ router.get('/:controller', async (req, res) => {
 })
 
 /**
- * view
+ * view / get a record by id
+ *
+ * @return {Response}
  */
 router.get('/:controller/:id', async (req, res) => {
     let controller = utilities.getApiController(req, res);
