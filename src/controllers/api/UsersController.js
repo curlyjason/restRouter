@@ -1,6 +1,8 @@
 class UsersController extends require('../Controller')
 {
+    config = require('config');
     bcrypt = require('bcrypt');
+    jwt = require('jsonwebtoken');
     async add(data) {
         const User = this.defaultTable();
         let { error } = User.joiSchema.validate(data);
@@ -29,15 +31,28 @@ class UsersController extends require('../Controller')
         return this.lo.pick(user, ['name', 'email']);
     }
 
-    // async auth() {
-    //     const valid = (value) => {
-    //         return typeof value === "string" && value.length > 0;
-    //     }
-    //     const {email, password} = this.req.body;
-    //
-    //     if (!(valid(email) && valid(password))) return 'email and password are required';
-    //
-    // }
+    async auth() {
+        const User = this.defaultTable();
+        //validator
+        const valid = (value) => {
+            return typeof value === "string" && value.length > 0;
+        }
+        const {email, password} = this.req.body;
+        if (!(valid(email) && valid(password))) throw new Error("Email and password are required.");
+
+        //find the user
+        let user = await User.find( {"email" : email});
+        if(user.length === 0) throw new Error("Unknown user name or password.");
+        user = user[0];
+
+        //compare password
+        let validPassword = await this.bcrypt.compare(password, user.password);
+        if(!validPassword) throw new Error("Unknown password or user name.");
+
+        //return result
+        return this.jwt.sign({email: user.email, _id: user._id},
+            this.config.get('jwtPrivateKey'));
+    }
 
 }
 

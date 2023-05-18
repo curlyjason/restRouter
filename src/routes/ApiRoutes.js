@@ -16,6 +16,18 @@ function edit(req, res) {
 }
 
 /**
+ * auth
+ */
+router.post('/auth', async (req, res) => {
+    try {
+        let controller = utilities.getNamedController('api/Users', req, res);
+        return res.status(200).send(await controller.auth(req.body));
+    } catch (e) {
+        return res.status(e.status ?? 500).send(e.toString());
+    }
+})
+
+/**
  * index / get a page of records
  *
  * @return {Response}

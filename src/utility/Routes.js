@@ -25,6 +25,19 @@ function getApiController(req, res) {
     }
 };
 
+function getNamedController(controllerName, req, res) {
+    try {
+        let classPath = '../controllers/' + controllerName + 'Controller';
+        return new (require(classPath))(req, res);
+
+    } catch (e) {
+        if (e.message.includes('Cannot find module')) throw new MissingControllerError(controllerName, { cause: e , status: 404});
+
+        throw e;
+    }
+
+}
+
 function getMVCController(req, res) {
     try {
         let classPath = '../controllers/' + inflector.capitalize(req.params.controller) + 'Controller';
@@ -54,3 +67,4 @@ module.exports.getApiController = getApiController;
 module.exports.getMVCController = getMVCController;
 module.exports.actionExists = actionExists;
 module.exports.parsePassedArgs = parsePassedArgs;
+module.exports.getNamedController = getNamedController;

@@ -1,5 +1,7 @@
 FROM node:latest
 
+ENV vidly_jwtPrivateKey mySecretkey
+
 WORKDIR /app
 
 # Install app dependencies
