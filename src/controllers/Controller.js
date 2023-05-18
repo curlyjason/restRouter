@@ -67,7 +67,7 @@ class Controller {
             await this.defaultTable().update(entity, data);
             return entity;
         } catch (e) {
-            return e;
+            throw e;
         }
     }
 

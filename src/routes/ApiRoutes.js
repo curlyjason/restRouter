@@ -48,33 +48,21 @@ router.get('/:controller/:id', async (req, res) => {
  * add
  */
 router.post('/:controller', async (req, res) => {
-    let controller = utilities.getApiController(req, res);
-    if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
-    if(!utilities.contentIsJson(req)) return res.status(400).send("Request body must be 'application/json");
-
-    let result = await controller.add(req.body);
-    if (!result) return res.status(404).send(`The requested ${req.params.controller} could not be found`);
-
-    return res.status(200).send(result);
-
-    //refactor
-    // try {
-    //     let result = await controller.add(req.body);
-    //     return res.status(result.status).send(result.body);
-    // } catch (e) {
-    //     return res.status(500).send("Controller add failed.");
-    // }
+    try {
+        let controller = utilities.getApiController(req, res);
+        return res.status(200).send(await controller.add(req.body));
+    } catch (e) {
+        return res.status(e.status ?? 500).send(e);
+    }
 })
 
 async function apiPatchPutHandler(req, res) {
-    let controller = utilities.getApiController(req, res);
-    if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
-    if(!utilities.contentIsJson(req)) return res.status(400).send("Request body must be 'application/json");
-
-    let result = await controller.edit(req.params.id, req.body);
-    if (!result) return res.status(404).send(`The requested ${req.params.controller} could not be found`);
-
-    return res.status(200).send(result);
+    try {
+        let controller = utilities.getApiController(req, res);
+        return res.status(200).send(await controller.edit(req.params.id, req.body));
+    } catch (e) {
+        return res.status(e.status ?? 500).send(e);
+    }
 }
 
 /**
