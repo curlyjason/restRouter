@@ -28,7 +28,7 @@ class CustomersTable extends require('./Table.js') {
                 })
                 .catch((err) => {
                     console.log(err.message)
-                    return err;
+                    throw err;
                 })
         };
         return await this.connection(find)
@@ -42,7 +42,7 @@ class CustomersTable extends require('./Table.js') {
                 })
                 .catch((err) => {
                     console.log(err.message)
-                    return err;
+                    throw err;
                 });
         }
         return await this.connection(findById);
