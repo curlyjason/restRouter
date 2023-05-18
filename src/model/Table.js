@@ -22,9 +22,8 @@ class Table {
             .then(async () => {
                 return await callback();
             })
-            .catch((err) => {
-                console.log('Failed connecting to database ' + err.message)
-                return err;
+            .catch((e) => {
+                throw e;
             });
 
     }
