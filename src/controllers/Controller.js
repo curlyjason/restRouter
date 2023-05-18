@@ -39,7 +39,7 @@ class Controller {
      * view a single document
      *
      * @param id {number}
-     * @returns {{name: string, id: number}|{name: string, id: number}} | undefined
+     * @returns {{name: string, id: number}|{name: string, id: number}} | {Error}
      */
     async view(id) {
         return await this.defaultTable().findById(id);
