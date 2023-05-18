@@ -4,6 +4,8 @@ class AppError extends Error {
 
     constructor(message, options) {
         super(message, options);
+        this.message = message;
+        this.status = options.status ?? 500;
     }
 }
 
