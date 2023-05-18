@@ -1,3 +1,4 @@
+const BadIdentifierError = require("../exceptions/BadIdentifierError");
 
 class GenresTable extends require('./Table.js') {
 
@@ -31,12 +32,14 @@ class GenresTable extends require('./Table.js') {
         let findById = async () => {
             return await this.Genres.findById(id)
                 .then((result) => {
-                    return result;
+                    return result ?? {};
                 })
-                .catch((err) => {
-                    console.log(err.message)
-                    return err;
-                });
+                .catch((e) => {
+                    if (e.message.includes('Cast to ObjectId failed')) {
+                        throw new BadIdentifierError(id, {cause: e, status: 500});
+                    }
+                    throw e;
+                })
         }
         return await this.connection(findById);
     }
