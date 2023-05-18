@@ -1,4 +1,5 @@
 const inflector = require("./Inflect");
+const MissingControllerError = require("../exceptions/MissingControllerError");
 
 /**
  *
@@ -7,12 +8,20 @@ const inflector = require("./Inflect");
  * @return {*|boolean}
  */
 function getApiController(req, res) {
+
+    let controller = req.params.controller;
+
     try {
-        let classPath = '../controllers/api/' + inflector.capitalize(req.params.controller) + 'Controller';
+        let classPath = '../controllers/api/' + inflector.capitalize(controller) + 'Controller';
         return new (require(classPath))(req, res);
+
     } catch (e) {
-        console.log(e);
-        return false;
+        if (e.message.includes('Cannot find module')) {
+            let err = new MissingControllerError(`api/${controller}`, { cause: e , status: 404})
+            throw err;
+        }
+
+        throw e;
     }
 };
 
