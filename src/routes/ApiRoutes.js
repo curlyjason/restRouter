@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const utilities = require("../utility/Routes");
+const {AppError} = require("../exceptions/AppError");
 
 
 function edit(req, res) {
@@ -20,10 +21,13 @@ function edit(req, res) {
  * @return {Response}
  */
 router.get('/:controller', async (req, res) => {
-    let controller = utilities.getApiController(req, res);
-    if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
-
-    return res.send(await controller.index());
+    try {
+        let controller = utilities.getApiController(req, res);
+        return res.send(await controller.index());
+    }
+    catch (e) {
+        return res.status(e.status ?? 500).send(e);
+    }
 })
 
 /**
@@ -32,13 +36,12 @@ router.get('/:controller', async (req, res) => {
  * @return {Response}
  */
 router.get('/:controller/:id', async (req, res) => {
-    let controller = utilities.getApiController(req, res);
-    if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
-
-    let result = await controller.view(req.params.id);
-    if (!result) return res.status(404).send(`The requested ${req.params.controller} could not be found`);
-
-    return res.status(200).send(result);
+    try {
+        let controller = utilities.getApiController(req, res);
+        return res.status(200).send(await controller.view(req.params.id));
+    } catch (e) {
+        return res.status(e.status ?? 500).send(e);
+    }
 })
 
 /**
