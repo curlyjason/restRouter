@@ -17,8 +17,7 @@ function getApiController(req, res) {
 
     } catch (e) {
         if (e.message.includes('Cannot find module')) {
-            let err = new MissingControllerError(`api/${controller}`, { cause: e , status: 404})
-            throw err;
+            throw new MissingControllerError(`api/${controller}`, {cause: e, status: 404});
         }
 
         throw e;
