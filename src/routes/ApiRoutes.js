@@ -90,14 +90,13 @@ router.put('/:controller/:id',  apiPatchPutHandler)
 /**
  * delete
  */
-router.delete('/:controller/:id', (req, res) => {
-    let controller = utilities.getApiController(req, res);
-    if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
-
-    let result = controller.delete(req.params.id);
-    if (!result) return res.status(404).send(`The requested '${req.params.controller}' record could not be found`);
-
-    return res.status(200).send(result);
+router.delete('/:controller/:id', async (req, res) => {
+    try {
+        let controller = utilities.getApiController(req, res);
+        return res.status(200).send(await controller.delete(req.params.id));
+    } catch (e) {
+        return res.status(e.status ?? 500).send(e);
+    }
 })
 
 module.exports = router;
