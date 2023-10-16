@@ -21,7 +21,8 @@ function edit(req, res) {
 router.post('/auth', async (req, res) => {
     try {
         let controller = utilities.getNamedController('api/Users', req, res);
-        return res.status(200).send(await controller.auth(req.body));
+        let token = await controller.auth(req.body);
+        return res.header('x-auth-token', token).status(200).send(token);
     } catch (e) {
         return res.status(e.status ?? 500).send(e.toString());
     }
